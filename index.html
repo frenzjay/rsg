@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSG</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: 'Trebuchet MS', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #game-container {
+            text-align: center;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        h1 {
+            font-size: 4rem;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+        }
+
+        .loading-text {
+            color: #888;
+            font-style: italic;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        button {
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.1s, background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #ff6b81;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+    <div id="loading-screen">
+        <h1>RSG</h1>
+        <p class="loading-text">Loading game. Please wait.</p>
+    </div>
+
+    <div id="play-screen" class="hidden">
+        <h1>RSG</h1>
+        <button id="play-button">Play</button>
+    </div>
+</div>
+
+<video id="rickroll" class="hidden" preload="auto">
+    <source src="rickroll.mp4" type="video/mp4">
+</video>
+
+<script>
+    const loadingScreen = document.getElementById('loading-screen');
+    const playScreen = document.getElementById('play-screen');
+    const playButton = document.getElementById('play-button');
+    const rickrollVideo = document.getElementById('rickroll');
+
+    setTimeout(() => {
+        loadingScreen.classList.add('hidden');
+        playScreen.classList.remove('hidden');
+    }, 4000);
+
+    playButton.addEventListener('click', () => {
+        playScreen.classList.add('hidden');
+        
+        rickrollVideo.classList.remove('hidden');
+        rickrollVideo.play();
+        
+        if (rickrollVideo.requestFullscreen) {
+            try {
+                rickrollVideo.requestFullscreen();
+            } catch (e) {}
+        }
+    });
+</script>
+
+</body>
+</html>
